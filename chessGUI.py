@@ -50,18 +50,22 @@ def setMachesClicked():
         matchesWindow.geometry('800x600')
         #Set matches
         matches = chessSetter.setMatches(players)
+        #Create a list for results
+        pointsTextboxes = [[0 for x in range(2)] for y in range(len(matches))]
         #Display matches
-        rowNum = 0
-        for m in matches:
+        for rowNum in range(len(matches)):
             lbl = Label(matchesWindow, text=str(rowNum + 1) + ". ")
             lbl.grid(column=0, row=rowNum)
-            lbl = Label(matchesWindow, text=m[0])
-            lbl.grid(column=1, row=rowNum)
-            lbl = Label(matchesWindow, text=" - ")
+            pointsTextboxes[rowNum][0] = Entry(matchesWindow, width=2)
+            pointsTextboxes[rowNum][0].grid(column=1, row=rowNum)
+            lbl = Label(matchesWindow, text=matches[rowNum][0])
             lbl.grid(column=2, row=rowNum)
-            lbl = Label(matchesWindow, text=m[1])
+            lbl = Label(matchesWindow, text=" - ")
             lbl.grid(column=3, row=rowNum)
-            rowNum += 1
+            lbl = Label(matchesWindow, text=matches[rowNum][1])
+            lbl.grid(column=4, row=rowNum)
+            pointsTextboxes[rowNum][1] = Entry(matchesWindow, width=2)
+            pointsTextboxes[rowNum][1].grid(column=5, row=rowNum)
 
 setMatchesButton = Button(mainWindow, text="Set matches!", command=setMachesClicked, bg="orange")
 setMatchesButton.grid(column=3, row=0)
